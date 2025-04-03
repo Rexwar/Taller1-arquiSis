@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../auth/models/user');
 
 const userController = {
   // Crear un nuevo usuario

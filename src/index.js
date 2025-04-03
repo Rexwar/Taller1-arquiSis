@@ -2,10 +2,11 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
-const authRoutes = require('./auth/routes/authRoutes');
-const userRoutes = require('./auth/routes/userRoutes');
-const initDatabase = require('./auth/config/init');
-const connectDB = require('./auth/config/mongodb');
+// Importar rutas
+const authRoutes = require('./modules/auth/auth.routes');
+const usersRoutes = require('./modules/users/users.routes');
+const billingRoutes = require('./modules/billing/billing.routes');
+const videosRoutes = require('./modules/videos/videos.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,7 +17,9 @@ app.use(express.json());
 
 // Rutas
 app.use('/auth', authRoutes);
-app.use('/usuarios', userRoutes);
+app.use('/usuarios', usersRoutes);
+app.use('/facturas', billingRoutes);
+app.use('/videos', videosRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
@@ -27,24 +30,14 @@ app.get('/', (req, res) => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ 
-    message: 'Error interno del servidor',
-    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+    status: 'error',
+    message: 'Algo salió mal!'
   });
 });
 
 // Inicializar base de datos y servidor
 const startServer = async () => {
   try {
-    // Inicializar MongoDB primero
-    console.log('Iniciando conexión a MongoDB...');
-    await connectDB();
-    console.log('MongoDB conectado exitosamente');
-
-    // Luego inicializar PostgreSQL
-    console.log('Iniciando conexión a PostgreSQL...');
-    await initDatabase();
-    console.log('PostgreSQL inicializado exitosamente');
-
     // Finalmente iniciar el servidor
     app.listen(PORT, () => {
       console.log(`Servidor corriendo en el puerto ${PORT}`);

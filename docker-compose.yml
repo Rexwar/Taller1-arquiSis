@@ -1,6 +1,22 @@
 version: '3.8'
 
 services:
+  app:
+    build: .
+    container_name: streamflow_app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - postgres
+      - mongodb_videos
+      - mongodb_users
+      - mariadb
+    volumes:
+      - .:/app
+      - /app/node_modules
+
   postgres:
     image: postgres:latest
     container_name: streamflow_auth_db
@@ -13,17 +29,43 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  mongodb:
+  mongodb_videos:
     image: mongo:latest
-    container_name: streamflow_users_db
+    container_name: streamflow_videos_db
     environment:
       MONGO_INITDB_ROOT_USERNAME: streamflow_user
       MONGO_INITDB_ROOT_PASSWORD: streamflow_password
     ports:
       - "27017:27017"
     volumes:
-      - mongodb_data:/data/db
+      - mongodb_videos_data:/data/db
+
+  mongodb_users:
+    image: mongo:latest
+    container_name: streamflow_users_db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: streamflow_user
+      MONGO_INITDB_ROOT_PASSWORD: streamflow_password
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb_users_data:/data/db
+
+  mariadb:
+    image: mariadb:latest
+    container_name: streamflow_billing_db
+    environment:
+      MYSQL_ROOT_PASSWORD: streamflow_password
+      MYSQL_DATABASE: streamflow_billing
+      MYSQL_USER: streamflow_user
+      MYSQL_PASSWORD: streamflow_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
 
 volumes:
   postgres_data:
-  mongodb_data: 
+  mongodb_videos_data:
+  mongodb_users_data:
+  mariadb_data: 
