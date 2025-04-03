@@ -1,0 +1,30 @@
+# Dependencias
+node_modules/
+package-lock.json
+
+# Archivos de entorno
+.env
+
+# Archivos de prueba
+**/*.test.js
+**/*.spec.js
+**/__tests__/
+**/test/
+**/tests/
+
+# Archivos de IDE
+.vscode/
+.idea/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Archivos de build
+dist/
+build/
+coverage/ 

@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "0e37a737-91e5-4238-aeec-fabedd14ff98",
+		"name": "Arquitectura de sistemas 2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "38054544"
+	},
+	"item": [
+		{
+			"name": "Flujo",
+			"item": [
+				{
+					"name": "Create Subject",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"if (jsonData && jsonData.id){\r",
+									"    pm.environment.set(\"asignatura_id\",jsonData.id);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"name\":\"indui\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/subjects"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Subjects",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{URL}}/subjects/{{asignatura_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Subject",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//{\"name\":\"pepa\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/subjects/{{asignatura_id}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Get one Subject",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": "{{URL}}/subjects/02"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Subject",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "//{\"name\":\"pepa\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{URL}}/subjects"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "taller 1",
+			"item": []
+		},
+		{
+			"name": "Create Subject",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "//{\"name\":\"pepa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{URL}}/subjects"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Subject",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\":\"eres\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{URL}}/subjects/0"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Subject",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "//{\"name\":\"pepa\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{URL}}/subjects/4"
+			},
+			"response": []
+		},
+		{
+			"name": "Get all Subjects",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{URL}}/subjects"
+			},
+			"response": []
+		},
+		{
+			"name": "Get one Subject",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": "{{URL}}/subjects/02"
+			},
+			"response": []
+		}
+	]
+}
